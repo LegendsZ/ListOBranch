@@ -1,0 +1,2 @@
+add_executable(listobranch_terminal main.cpp)
+target_link_libraries(listobranch_terminal PRIVATE listobranch)
