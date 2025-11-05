@@ -5,14 +5,12 @@
 #include "export.h"
 #include <string>
 
-
-namespace branch {
-
-  class LISTOBRANCH_API Core {
-  public:
-    std::string getVersion() const;
-  };
-
+namespace ListOBranch {
+  namespace Branch {
+    struct BranchData{
+      std::string name;
+    };
+  }
 }
 
 #endif

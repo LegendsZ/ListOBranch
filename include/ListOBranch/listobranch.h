@@ -5,16 +5,20 @@
 
 // includes here
 #include "export.h"
+#include "repo.h"
+
 #include <string>
 
+namespace ListOBranch {
+  namespace {
+    inline bool initialized = false;
+    std::vector<Repo::RepoData> repositories;
+  }
 
-namespace listobranch {
-
-  class LISTOBRANCH_API Core {
-  public:
-    std::string getVersion() const;
-  };
-
+  LISTOBRANCH_API bool initialize();
+  LISTOBRANCH_API bool saveData(const std::string& filename);
+  LISTOBRANCH_API bool loadData(const std::string& filename);
+  LISTOBRANCH_API std::string getVersion();
 }
 
 #endif

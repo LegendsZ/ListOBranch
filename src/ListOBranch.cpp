@@ -1,9 +1,18 @@
 #include "listobranch/listobranch.h"
 
-namespace listobranch {
+namespace ListOBranch {
 
-    std::string Core::getVersion() const {
+    std::string getVersion() {
         return VERSION;
+    }
+
+    bool initialize() {
+        if (!initialized) {
+            // init here
+            initialized = true;
+            return true;
+        }
+        return false;
     }
 
 }

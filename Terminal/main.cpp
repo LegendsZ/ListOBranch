@@ -2,7 +2,6 @@
 #include "listobranch/listobranch.h"
 
 int main() {
-    listobranch::Core core;
-    std::cout << "ListOBranch version: " << core.getVersion() << std::endl;
+    std::cout << "ListOBranch version: " << ListOBranch::getVersion() << std::endl;
     return 0;
 }
