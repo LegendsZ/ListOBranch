@@ -4,17 +4,9 @@
 #define VERSION "1.0.0"
 
 // includes here
+#include "export.h"
 #include <string>
 
-#ifdef _WIN32
-  #ifdef LISTOBRANCH_EXPORTS
-    #define LISTOBRANCH_API __declspec(dllexport)
-  #else
-    #define LISTOBRANCH_API __declspec(dllimport)
-  #endif
-#else
-  #define LISTOBRANCH_API
-#endif
 
 namespace listobranch {
 
