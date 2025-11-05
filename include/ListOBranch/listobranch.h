@@ -1,7 +1,10 @@
 #ifndef LISTOBRANCH_H
 #define LISTOBRANCH_H
 
+#define VERSION "1.0.0"
+
 // includes here
+#include <string>
 
 #ifdef _WIN32
   #ifdef LISTOBRANCH_EXPORTS
@@ -17,7 +20,7 @@ namespace listobranch {
 
   class LISTOBRANCH_API Core {
   public:
-    void start();
+    std::string getVersion() const;
   };
 
 }

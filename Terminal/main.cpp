@@ -3,6 +3,6 @@
 
 int main() {
     listobranch::Core core;
-    std::cout << core.greet() << std::endl;
+    std::cout << "ListOBranch version: " << core.getVersion() << std::endl;
     return 0;
 }
