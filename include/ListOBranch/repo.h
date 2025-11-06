@@ -2,9 +2,7 @@
 #define REPO_H
 
 // includes here
-#include "export.h"
 #include "branch.h"
-#include <string>
 #include <vector>
 
 namespace ListOBranch {

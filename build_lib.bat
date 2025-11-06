@@ -7,10 +7,13 @@ REM Default: DEBUG off
 set LOG_DEBUG=0
 
 REM Parse command line args
-for %%A in (%*) do (
-    if /I "%%~A"=="--LOG_DEBUG=1" set LOG_DEBUG=1
-    if /I "%%~A"=="--LOG_DEBUG=0" set LOG_DEBUG=0
-)
+:parse_args
+if "%~1"=="" goto args_done
+if /I "%~1"=="--LOG_DEBUG=1" set LOG_DEBUG=1
+if /I "%~1"=="--LOG_DEBUG=0" set LOG_DEBUG=0
+shift
+goto parse_args
+:args_done
 
 echo [INFO] LOG_DEBUG flag set to %LOG_DEBUG%
 
@@ -27,3 +30,7 @@ cmake --build build --target listobranch
 
 if %errorlevel% neq 0 (
     echo [ERROR] Build failed.
+    exit /b %errorlevel%
+)
+
+echo [SUCCESS] ListOBranch library built successfully!

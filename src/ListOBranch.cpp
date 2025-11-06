@@ -10,32 +10,45 @@ namespace ListOBranch {
         return VERSION;
     }
 
-    bool initialize(std::string saveDataFile) {
+    bool initialize() {
         if (!initialized) {
-            std::cout << "initializing ListOBranch...\n";
+            LOB_DEBUG("initializing ListOBranch...\n");
             // init here
-            if (!saveDataFile.empty()) {
-                loadData(saveDataFile);
-            }
             initialized = true;
-            std::cout << "Initialized ListOBranch!\n";
+            LOB_DEBUG("Initialized ListOBranch!\n");
             return true;
         }
-        std::cout << "Already initialized ListOBranch!\n";
+        LOB_DEBUG("Already initialized ListOBranch!\n");
+        return false;
+    }
+
+    bool initialize(std::string saveDataFile) {
+        if (saveDataFile.empty()) {
+            return false;
+        }
+        if (!initialized) {
+            LOB_DEBUG("initializing ListOBranch...\n");
+            // init here
+            loadData(saveDataFile);
+            initialized = true;
+            LOB_DEBUG("Initialized ListOBranch!\n");
+            return true;
+        }
+        LOB_DEBUG("Already initialized ListOBranch!\n");
         return false;
     }
 
     bool saveData(const std::string& filename) {
-        std::cout << "Saving data to " << filename << "...\n";
+        LOB_DEBUG("Saving data to " + filename + "...\n");
         // Dummy implementation
-        std::cout << "Data saved to " << filename << std::endl;
+        LOB_DEBUG("Data saved to " + filename + "\n");
         return true;
     }
 
     bool loadData(const std::string& filename) {
-        std::cout << "Loading data from " << filename << "...\n";
+        LOB_DEBUG("Loading data from " + filename + "...\n");
         // Dummy implementation
-        std::cout << "Data loaded from " << filename << std::endl;
+        LOB_DEBUG("Data loaded from " + filename + "\n");
         return true;
     }
 
@@ -49,15 +62,15 @@ namespace ListOBranch {
     }
 
     bool removeRepository(const Repo::RepoData& repo) {
-        std::cout << "Removing repository: " << repo.name << "\n";
+        LOB_DEBUG("Removing repository: " + repo.name + "\n");
         auto it = std::remove_if(repositories.begin(), repositories.end(),
                                  [&repo](const Repo::RepoData& r) { return r.name == repo.name; });
         if (it != repositories.end()) {
             repositories.erase(it, repositories.end());
-            std::cout << "Repository removed: " << repo.name << "\n";
+            LOB_DEBUG("Repository removed: " + repo.name + "\n");
             return true;
         }
-        std::cout << "Repository not found: " << repo.name << "\n";
+        LOB_DEBUG("Repository not found: " + repo.name + "\n");
         return false;
     }
 }

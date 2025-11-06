@@ -4,11 +4,19 @@
 #define VERSION "1.0.0"
 
 // includes here
-#include "export.h"
 #include "repo.h"
-
 #include <iostream>
-#include <string>
+
+#ifdef LOB_DEBUG_MODE
+    #if LOB_DEBUG_MODE
+        #include <iostream>
+        #define LOB_DEBUG(msg) std::cout << "[ListOBranch DEBUG] " << msg << std::endl
+    #else
+        #define LOB_DEBUG(msg) ((void)0)
+    #endif
+#else
+    #define LOB_DEBUG(msg) ((void)0)
+#endif
 
 namespace ListOBranch {
   extern bool initialized;
@@ -17,6 +25,7 @@ namespace ListOBranch {
   LISTOBRANCH_API std::string getVersion();
 
   LISTOBRANCH_API bool initialize(std::string saveDataFile);
+  LISTOBRANCH_API bool initialize();
   LISTOBRANCH_API bool saveData(const std::string& filename);
   LISTOBRANCH_API bool loadData(const std::string& filename);
 
