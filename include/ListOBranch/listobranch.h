@@ -7,18 +7,22 @@
 #include "export.h"
 #include "repo.h"
 
+#include <iostream>
 #include <string>
 
 namespace ListOBranch {
-  namespace {
-    inline bool initialized = false;
-    std::vector<Repo::RepoData> repositories;
-  }
+  extern bool initialized;
+  extern std::vector<Repo::RepoData> repositories;
 
-  LISTOBRANCH_API bool initialize();
+  LISTOBRANCH_API std::string getVersion();
+
+  LISTOBRANCH_API bool initialize(std::string saveDataFile);
   LISTOBRANCH_API bool saveData(const std::string& filename);
   LISTOBRANCH_API bool loadData(const std::string& filename);
-  LISTOBRANCH_API std::string getVersion();
+
+  LISTOBRANCH_API std::vector<Repo::RepoData> getRepositories();
+  LISTOBRANCH_API bool addRepository(const Repo::RepoData& repo);
+  LISTOBRANCH_API bool removeRepository(const Repo::RepoData& repo);
 }
 
 #endif
