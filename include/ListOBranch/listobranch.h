@@ -7,15 +7,13 @@
 #include "repo.h"
 #include <iostream>
 
-#ifdef LOB_DEBUG_MODE
-    #if LOB_DEBUG_MODE
-        #include <iostream>
-        #define LOB_DEBUG(msg) std::cout << "[ListOBranch DEBUG] " << msg << std::endl
-    #else
-        #define LOB_DEBUG(msg) ((void)0)
-    #endif
+#ifdef LOG_DEBUG_MODE
+  #pragma message("LOG_DEBUG_MODE is defined!")
+  #include <iostream>
+  #define LOG_DEBUG(msg) std::cout << "[ListOBranch DEBUG] " << msg << std::endl
 #else
-    #define LOB_DEBUG(msg) ((void)0)
+  #pragma message("LOG_DEBUG_MODE is not defined!")
+  #define LOG_DEBUG(msg) ((void)0)
 #endif
 
 namespace ListOBranch {
