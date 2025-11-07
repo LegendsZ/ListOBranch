@@ -18,29 +18,34 @@
 
 namespace ListOBranch {
   extern bool initialized;
-  extern std::vector<Repo::RepoData> repositories;
+  extern std::vector<Repo::RepoData*> repositories;
 
   LISTOBRANCH_API std::string getVersion();
 
-  LISTOBRANCH_API bool initialize(std::string saveDataFile);
+  LISTOBRANCH_API bool initialize(std::string* saveDataFile);
   LISTOBRANCH_API bool initialize();
-  LISTOBRANCH_API bool safeExit(std::string saveDataFile);
+  LISTOBRANCH_API bool safeExit(std::string* saveDataFile);
   LISTOBRANCH_API bool safeExit();
 
-  LISTOBRANCH_API bool saveData(const std::string& filename);
-  LISTOBRANCH_API bool loadData(const std::string& filename);
+  LISTOBRANCH_API bool saveData(const std::string* filename);
+  LISTOBRANCH_API bool loadData(const std::string* filename);
   
-  LISTOBRANCH_API std::vector<Repo::RepoData> getRepositories();
-  LISTOBRANCH_API bool addRepository(const Repo::RepoData& repo);
-  LISTOBRANCH_API bool addRepository(const std::string& name);
+  LISTOBRANCH_API std::vector<Repo::RepoData*> getRepositories();
+  LISTOBRANCH_API bool addRepository(const Repo::RepoData* repo);
+  LISTOBRANCH_API bool addRepository(const std::string* name);
 
-  LISTOBRANCH_API bool removeRepository(const Repo::RepoData& repo);
-  LISTOBRANCH_API bool removeRepository(const std::string& name);
+  LISTOBRANCH_API bool removeRepository(const Repo::RepoData* repo);
+  LISTOBRANCH_API bool removeRepository(const std::string* name);
 
-  LISTOBRANCH_API bool addBranchToRepository(Repo::RepoData& repo, const Branch::BranchData& branch);
-  LISTOBRANCH_API bool addBranchToRepository(Repo::RepoData& repo, const std::string& branchName);
-  LISTOBRANCH_API bool addBranchToRepository(const std::string& repoName, const Branch::BranchData& branch);
-  LISTOBRANCH_API bool addBranchToRepository(const std::string& repoName, const std::string& branchName);
+  LISTOBRANCH_API bool addBranchToRepository(Repo::RepoData* repo, const Branch::BranchData* branch);
+  LISTOBRANCH_API bool addBranchToRepository(Repo::RepoData* repo, const std::string* branchName);
+  LISTOBRANCH_API bool addBranchToRepository(const std::string* repoName, const Branch::BranchData* branch);
+  LISTOBRANCH_API bool addBranchToRepository(const std::string* repoName, const std::string* branchName);
+
+  LISTOBRANCH_API bool removeBranchFromRepository(Repo::RepoData* repo, const Branch::BranchData* branch);
+  LISTOBRANCH_API bool removeBranchFromRepository(Repo::RepoData* repo, const std::string* branchName);
+  LISTOBRANCH_API bool removeBranchFromRepository(const std::string* repoName, const Branch::BranchData* branch);
+  LISTOBRANCH_API bool removeBranchFromRepository(const std::string* repoName, const std::string* branchName);
 
 }
 
