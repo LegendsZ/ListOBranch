@@ -2,8 +2,9 @@
 #include "listobranch/listobranch.h"
 
 int main() {
-    std::cout << "ListOBranch version: " << ListOBranch::getVersion() << std::endl;
+    std::cout << "ListOBranch backend library version: " << ListOBranch::getVersion() << std::endl;
     ListOBranch::initialize();
-    ListOBranch::initialize();
+    
+    ListOBranch::safeExit();
     return 0;
 }

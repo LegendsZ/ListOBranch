@@ -9,19 +9,7 @@ namespace ListOBranch {
     std::string getVersion() {
         return VERSION;
     }
-
-    bool initialize() {
-        if (!initialized) {
-            LOG_DEBUG("initializing ListOBranch...\n");
-            // init here
-            initialized = true;
-            LOG_DEBUG("Initialized ListOBranch!\n");
-            return true;
-        }
-        LOG_DEBUG("Already initialized ListOBranch!\n");
-        return false;
-    }
-
+    
     bool initialize(std::string saveDataFile) {
         if (saveDataFile.empty()) {
             return false;
@@ -36,6 +24,45 @@ namespace ListOBranch {
         }
         LOG_DEBUG("Already initialized ListOBranch!\n");
         return false;
+    }
+
+    bool initialize() {
+        if (!initialized) {
+            LOG_DEBUG("initializing ListOBranch...\n");
+            // init here
+            initialized = true;
+            LOG_DEBUG("Initialized ListOBranch!\n");
+            return true;
+        }
+        LOG_DEBUG("Already initialized ListOBranch!\n");
+        return false;
+    }
+
+    bool safeExit(std::string saveDataFile) {
+        if (initialized) {
+            LOG_DEBUG("Exiting ListOBranch safely...\n");
+            // cleanup here
+            saveData(saveDataFile);
+            initialized = false;
+            LOG_DEBUG("ListOBranch exited safely.\n");
+        } else {
+            LOG_DEBUG("ListOBranch was not initialized. No need to exit safely.\n");
+            return false;
+        }
+        return true;
+    }
+
+    bool safeExit() {
+        if (initialized) {
+            LOG_DEBUG("Exiting ListOBranch safely...\n");
+            // cleanup here
+            initialized = false;
+            LOG_DEBUG("ListOBranch exited safely.\n");
+        } else {
+            LOG_DEBUG("ListOBranch was not initialized. No need to exit safely.\n");
+            return false;
+        }
+        return true;
     }
 
     bool saveData(const std::string& filename) {
