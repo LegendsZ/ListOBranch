@@ -4,12 +4,11 @@ REM Build the terminal frontend (and the library)
 REM ======================================================
 
 REM Default: DEBUG off
-set LOG_DEBUG=1
+set LOG_DEBUG=0
 
 REM Parse command line args
 for %%A in (%*) do (
-    if /I "%%~A"=="--LOG_DEBUG=1" set LOG_DEBUG=1
-    if /I "%%~A"=="--LOG_DEBUG=0" set LOG_DEBUG=0
+    if /I "%%~A"=="--debug" set LOG_DEBUG=1
 )
 
 echo [INFO] LOG_DEBUG flag set to %LOG_DEBUG%

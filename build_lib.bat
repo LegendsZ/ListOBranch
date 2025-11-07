@@ -7,13 +7,9 @@ REM Default: DEBUG off
 set LOG_DEBUG=1
 
 REM Parse command line args
-:parse_args
-if "%~1"=="" goto args_done
-if /I "%~1"=="--LOG_DEBUG=1" set LOG_DEBUG=1
-if /I "%~1"=="--LOG_DEBUG=0" set LOG_DEBUG=0
-shift
-goto parse_args
-:args_done
+for %%A in (%*) do (
+    if /I "%%~A"=="--debug" set LOG_DEBUG=1
+)
 
 echo [INFO] LOG_DEBUG flag set to %LOG_DEBUG%
 
