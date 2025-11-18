@@ -4,7 +4,7 @@ REM Build the listobranch library only
 REM ======================================================
 
 REM Default: DEBUG off
-set LOG_DEBUG=1
+set LOG_DEBUG=0
 
 REM Parse command line args
 for %%A in (%*) do (
