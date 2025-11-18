@@ -112,7 +112,7 @@ namespace ListOBranch {
     bool removeRepository(std::string* name) {
         LOG_DEBUG("Finding repository: " << *name);
         auto it = std::remove_if(repositories.begin(), repositories.end(),
-                                 [*name](Repo::RepoData* r) { return r->name == *name; });
+                                 [name](Repo::RepoData* r) { return r->name == *name; });
         if (it != repositories.end()) {
             repositories.erase(it, repositories.end());
             LOG_DEBUG("Repository removed: " << *name);

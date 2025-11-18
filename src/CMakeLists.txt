@@ -1,5 +1,6 @@
 add_library(listobranch SHARED
     listobranch.cpp
+    repo.cpp
 )
 
 target_include_directories(listobranch
