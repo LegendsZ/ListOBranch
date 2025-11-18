@@ -190,72 +190,71 @@ namespace ListOBranch {
         return false;
     }
 
-     /*
--    bool removeBranchFromRepository(Repo::RepoData* repo, const Branch::BranchData* branch) {
--        LOG_DEBUG("Removing branch " + branch->name + " from repository " + repo->name + "\n");
--        for (const Repo::RepoData* r : repositories) {
--            if (r->name == repo->name) {
--                if (Repo::deleteBranchFromRepository(r, branch)) {
--                    LOG_DEBUG("Removed branch " + branch->name + " from repository " + repo->name + "\n");
--                    return true;
--                } else {
--                    LOG_DEBUG("Failed to remove branch " + branch->name + " from repository " + repo->name + "\n");
--                    return false;
--                }
--            }
--        }
--        LOG_DEBUG("Repository not found: " + repo->name + "\n");
--        return false;
--    }
--
--    bool removeBranchFromRepository(Repo::RepoData* repo, const std::string* branchName) {
--        LOG_DEBUG("Removing branch " + *branchName + " from repository " + repo->name + "\n");
--        for (const Repo::RepoData* r : repositories) {
--            if (r->name == repo->name) {
--                if (Repo::deleteBranchFromRepository(r, branchName)) {
--                    LOG_DEBUG("Removed branch " + *branchName + " from repository " + repo->name + "\n");
--                    return true;
--                } else {
--                    LOG_DEBUG("Failed to remove branch " + *branchName + " from repository " + repo->name + "\n");
--                    return false;
--                }
--            }
--        }
--        LOG_DEBUG("Repository not found: " + repo->name + "\n");
--        return false;
--    }
--
--    bool removeBranchFromRepository(const std::string* repoName, const Branch::BranchData* branch) {
--        LOG_DEBUG("Removing branch " + branch->name + " from repository " + *repoName + "\n");
--        for (const Repo::RepoData* r : repositories) {
--            if (r->name == *repoName) {
--                if (Repo::deleteBranchFromRepository(r, branch)) {
--                    LOG_DEBUG("Removed branch " + branch->name + " from repository " + *repoName + "\n");
--                    return true;
--                } else {
--                    LOG_DEBUG("Failed to remove branch " + branch->name + " from repository " + *repoName + "\n");
--                    return false;
--                }
--            }
--        }
--        LOG_DEBUG("Repository not found: " + *repoName + "\n");
--        return false;
--    }
--
--    bool removeBranchFromRepository(const std::string* repoName, const std::string* branchName) {
--        LOG_DEBUG("Removing branch " + *branchName + " from repository " + *repoName + "\n");
--        for (const Repo::RepoData* r : repositories) {
--            if (r->name == *repoName) {
--                if (Repo::deleteBranchFromRepository(r, branchName)) {
--                    LOG_DEBUG("Removed branch " + *branchName + " from repository " + *repoName + "\n");
--                    return true;
--                } else {
--                    LOG_DEBUG("Failed to remove branch " + *branchName + " from repository " + *repoName + "\n");
--                    return false;
--                }
--            }
--        }
--        LOG_DEBUG("Repository not found: " + *repoName + "\n");
--        return false;
--    }*/
+     bool removeBranchFromRepository(Repo::RepoData* repo, Branch::BranchData* branch) {
+        LOG_DEBUG("Removing branch " << branch->name << " from repository " << repo->name);
+        for (Repo::RepoData* r : repositories) {
+            if (r->name == repo->name) {
+                if (Repo::removeBranchFromRepository(r, branch)) {
+                    LOG_DEBUG("Removed branch " << branch->name << " from repository " << repo->name);
+                    return true;
+                } else {
+                    LOG_DEBUG("Failed to remove branch " << branch->name << " from repository " << repo->name);
+                    return false;
+                }
+            }
+        }
+        LOG_DEBUG("Repository not found: " << repo->name);
+        return false;
+    }
+
+    bool removeBranchFromRepository(Repo::RepoData* repo, const std::string* branchName) {
+        LOG_DEBUG("Removing branch " << *branchName << " from repository " << repo->name);
+        for (Repo::RepoData* r : repositories) {
+            if (r->name == repo->name) {
+                if (Repo::removeBranchFromRepository(r, branchName)) {
+                    LOG_DEBUG("Removed branch " << *branchName << " from repository " << repo->name);
+                    return true;
+                } else {
+                    LOG_DEBUG("Failed to remove branch " << *branchName << " from repository " << repo->name);
+                    return false;
+                }
+            }
+        }
+        LOG_DEBUG("Repository not found: " << repo->name);
+        return false;
+    }
+
+    bool removeBranchFromRepository(std::string* repoName, Branch::BranchData* branch) {
+        LOG_DEBUG("Removing branch " << branch->name << " from repository " << *repoName);
+        for (Repo::RepoData* r : repositories) {
+            if (r->name == *repoName) {
+                if (Repo::removeBranchFromRepository(r, branch)) {
+                    LOG_DEBUG("Removed branch " << branch->name << " from repository " << *repoName);
+                    return true;
+                } else {
+                    LOG_DEBUG("Failed to remove branch " << branch->name << " from repository " << *repoName);
+                    return false;
+                }
+            }
+        }
+        LOG_DEBUG("Repository not found: " << *repoName);
+        return false;
+    }
+
+    bool removeBranchFromRepository(const std::string* repoName, const std::string* branchName) {
+        LOG_DEBUG("Removing branch " << *branchName << " from repository " << *repoName);
+        for (Repo::RepoData* r : repositories) {
+            if (r->name == *repoName) {
+                if (Repo::removeBranchFromRepository(r, branchName)) {
+                    LOG_DEBUG("Removed branch " << *branchName << " from repository " << *repoName);
+                    return true;
+                } else {
+                    LOG_DEBUG("Failed to remove branch " << *branchName << " from repository " << *repoName);
+                    return false;
+                }
+            }
+        }
+        LOG_DEBUG("Repository not found: " << *repoName);
+        return false;
+    }
 }

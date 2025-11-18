@@ -42,12 +42,10 @@ namespace ListOBranch {
   LISTOBRANCH_API bool addBranchToRepository(std::string* repoName, Branch::BranchData* branch);
   LISTOBRANCH_API bool addBranchToRepository(const std::string* repoName, const std::string* branchName);
 
-  /*
   LISTOBRANCH_API bool removeBranchFromRepository(Repo::RepoData* repo, const Branch::BranchData* branch);
   LISTOBRANCH_API bool removeBranchFromRepository(Repo::RepoData* repo, const std::string* branchName);
-  LISTOBRANCH_API bool removeBranchFromRepository(const std::string* repoName, const Branch::BranchData* branch);
+  LISTOBRANCH_API bool removeBranchFromRepository(std::string* repoName, Branch::BranchData* branch);
   LISTOBRANCH_API bool removeBranchFromRepository(const std::string* repoName, const std::string* branchName);
-  */
 }
 
 #endif
