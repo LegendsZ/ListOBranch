@@ -1,9 +1,9 @@
 #include "listobranch/repo.h"
 
 namespace ListOBranch{
-    bool addBranchToRepository(Repo::RepoData* repo, const Branch::BranchData* branch) {
+    bool addBranchToRepository(Repo::RepoData* repo, Branch::BranchData* branch) {
       if (repo && branch) {
-        repo->branches.push_back(*branch);
+        repo->branches.push_back(branch);
         return true;
       }
       return false;
@@ -11,9 +11,9 @@ namespace ListOBranch{
 
     bool addBranchToRepository(Repo::RepoData* repo, const std::string* branchName) {
       if (repo && branchName && !branchName->empty()) {
-        Branch::BranchData branch;
-        branch.name = *branchName;
-        return addBranchToRepository(repo, &branch);
+        Branch::BranchData* branch = new Branch::BranchData();
+        branch->name = *branchName;
+        return addBranchToRepository(repo, branch);
       }
       return false;
     }

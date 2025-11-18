@@ -1,11 +1,9 @@
 #include "listobranch/listobranch.h"
 
-namespace ListOBranch{
+namespace ListOBranch {
     bool initialized = false;
     std::vector<ListOBranch::Repo::RepoData*> repositories;
-}
 
-namespace ListOBranch {
     std::string getVersion() {
         return VERSION;
     }
@@ -92,7 +90,7 @@ namespace ListOBranch {
         return repositories;
     }
 
-    bool addRepository(const Repo::RepoData* repo) {
+    bool addRepository(Repo::RepoData* repo) {
         repositories.push_back(repo);
         return true;
     }
@@ -107,7 +105,7 @@ namespace ListOBranch {
     bool removeRepository(const Repo::RepoData* repo) {
         LOG_DEBUG("Finding repository: " + repo->name + "\n");
         auto it = std::remove_if(repositories.begin(), repositories.end(),
-                                 [repo](const Repo::RepoData& r) { return r.name == repo->name; });
+                                 [repo](Repo::RepoData* r) { return r->name == repo->name; });
         if (it != repositories.end()) {
             repositories.erase(it, repositories.end());
             LOG_DEBUG("Repository removed: " + repo->name + "\n");
@@ -117,10 +115,10 @@ namespace ListOBranch {
         return false;
     }
 
-    bool removeRepository(const std::string* name) {
+    bool removeRepository(std::string* name) {
         LOG_DEBUG("Finding repository: " + *name + "\n");
         auto it = std::remove_if(repositories.begin(), repositories.end(),
-                                 [*name](const Repo::RepoData* r) { return r->name == *name; });
+                                 [*name](Repo::RepoData* r) { return r->name == *name; });
         if (it != repositories.end()) {
             repositories.erase(it, repositories.end());
             LOG_DEBUG("Repository removed: " + *name + "\n");
@@ -130,9 +128,9 @@ namespace ListOBranch {
         return false;
     }
     
-    bool addBranchToRepository(Repo::RepoData* repo, const Branch::BranchData* branch) {
+    bool addBranchToRepository(Repo::RepoData* repo, Branch::BranchData* branch) {
         LOG_DEBUG("Adding branch " + branch->name + " to repository " + repo->name + "\n");
-        for (const Repo::RepoData* r : repositories) {
+        for (Repo::RepoData* r : repositories) {
             if (r->name == repo->name) {
                 if (Repo::addBranchToRepository(r, branch)){
                     LOG_DEBUG("Added branch " + branch->name + " to repository " + repo->name + "\n");
@@ -149,7 +147,7 @@ namespace ListOBranch {
 
     bool addBranchToRepository(Repo::RepoData* repo, const std::string* branchName) {
         LOG_DEBUG("Adding branch " + *branchName + " to repository " + repo->name + "\n");
-        for (const Repo::RepoData* r : repositories) {
+        for (Repo::RepoData* r : repositories) {
             if (r->name == repo->name) {
                 if (Repo::addBranchToRepository(r, branchName)) {
                     LOG_DEBUG("Added branch " + *branchName + " to repository " + repo->name + "\n");
@@ -164,9 +162,9 @@ namespace ListOBranch {
         return false;
     }
 
-    bool addBranchToRepository(const std::string* repoName, const Branch::BranchData* branch) {
-        DEBUG("Adding branch " + branch->name + " to repository " + *repoName + "\n");
-        for (const Repo::RepoData* r : repositories) {
+    bool addBranchToRepository(std::string* repoName, Branch::BranchData* branch) {
+        LOG_DEBUG("Adding branch " + branch->name + " to repository " + *repoName + "\n");
+        for (Repo::RepoData* r : repositories) {
             if (r->name == *repoName) {
                 if (Repo::addBranchToRepository(r, branch)) {
                     LOG_DEBUG("Added branch " + branch->name + " to repository " + *repoName + "\n");
@@ -182,8 +180,8 @@ namespace ListOBranch {
     }
 
     bool addBranchToRepository(const std::string* repoName, const std::string* branchName) {
-        DEBUG("Adding branch " + *branchName + " to repository " + *repoName + "\n");
-        for (const Repo::RepoData* r : repositories) {
+        LOG_DEBUG("Adding branch " + *branchName + " to repository " + *repoName + "\n");
+        for (Repo::RepoData* r : repositories) {
             if (r->name == *repoName) {
                 if (Repo::addBranchToRepository(r, branchName)) {
                     LOG_DEBUG("Added branch " + *branchName + " to repository " + *repoName + "\n");
@@ -198,8 +196,9 @@ namespace ListOBranch {
         return false;
     }
 
+    /*
     bool removeBranchFromRepository(Repo::RepoData* repo, const Branch::BranchData* branch) {
-        DEBUG("Removing branch " + branch->name + " from repository " + repo->name + "\n");
+        LOG_DEBUG("Removing branch " + branch->name + " from repository " + repo->name + "\n");
         for (const Repo::RepoData* r : repositories) {
             if (r->name == repo->name) {
                 if (Repo::deleteBranchFromRepository(r, branch)) {
@@ -216,7 +215,7 @@ namespace ListOBranch {
     }
 
     bool removeBranchFromRepository(Repo::RepoData* repo, const std::string* branchName) {
-        DEBUG("Removing branch " + *branchName + " from repository " + repo->name + "\n");
+        LOG_DEBUG("Removing branch " + *branchName + " from repository " + repo->name + "\n");
         for (const Repo::RepoData* r : repositories) {
             if (r->name == repo->name) {
                 if (Repo::deleteBranchFromRepository(r, branchName)) {
@@ -233,7 +232,7 @@ namespace ListOBranch {
     }
 
     bool removeBranchFromRepository(const std::string* repoName, const Branch::BranchData* branch) {
-        DEBUG("Removing branch " + branch->name + " from repository " + *repoName + "\n");
+        LOG_DEBUG("Removing branch " + branch->name + " from repository " + *repoName + "\n");
         for (const Repo::RepoData* r : repositories) {
             if (r->name == *repoName) {
                 if (Repo::deleteBranchFromRepository(r, branch)) {
@@ -250,7 +249,7 @@ namespace ListOBranch {
     }
 
     bool removeBranchFromRepository(const std::string* repoName, const std::string* branchName) {
-        DEBUG("Removing branch " + *branchName + " from repository " + *repoName + "\n");
+        LOG_DEBUG("Removing branch " + *branchName + " from repository " + *repoName + "\n");
         for (const Repo::RepoData* r : repositories) {
             if (r->name == *repoName) {
                 if (Repo::deleteBranchFromRepository(r, branchName)) {
@@ -264,5 +263,5 @@ namespace ListOBranch {
         }
         LOG_DEBUG("Repository not found: " + *repoName + "\n");
         return false;
-    }
+    }*/
 }

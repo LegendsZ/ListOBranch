@@ -9,13 +9,13 @@ namespace ListOBranch {
   namespace Repo {
     struct RepoData{
       std::string name;
-      std::vector<Branch::BranchData> branches;
+      std::vector<Branch::BranchData*> branches;
     };
 
-    bool addBranchToRepository(Repo::RepoData* repo, const Branch::BranchData* branch);
+    bool addBranchToRepository(Repo::RepoData* repo, Branch::BranchData* branch);
     bool addBranchToRepository(Repo::RepoData* repo, const std::string* branchName);
 
-    bool removeBranchFromRepository(Repo::RepoData* repo, const Branch::BranchData* branch);
+    bool removeBranchFromRepository(Repo::RepoData* repo, Branch::BranchData* branch);
     bool removeBranchFromRepository(Repo::RepoData* repo, const std::string* branchName);
   }
 }
