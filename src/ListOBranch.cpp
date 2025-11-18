@@ -7,49 +7,46 @@ namespace ListOBranch {
     std::string getVersion() {
         return VERSION;
     }
-    
+
     bool initialize(std::string* saveDataFile) {
         if (saveDataFile == nullptr || saveDataFile->empty()) {
-            LOG_DEBUG("Invalid save data file provided for initialization.\n");
+            LOG_DEBUG("Invalid save data file provided for initialization.");
             return false;
         }
         if (!initialized) {
-            LOG_DEBUG("initializing ListOBranch...\n");
-            // init here
+            LOG_DEBUG("initializing ListOBranch...");
             loadData(saveDataFile);
             initialized = true;
-            LOG_DEBUG("Initialized ListOBranch!\n");
+            LOG_DEBUG("Initialized ListOBranch!");
             return true;
         }
-        LOG_DEBUG("Already initialized ListOBranch!\n");
+        LOG_DEBUG("Already initialized ListOBranch!");
         return false;
     }
 
     bool initialize() {
         if (!initialized) {
-            LOG_DEBUG("initializing ListOBranch...\n");
-            // init here
+            LOG_DEBUG("initializing ListOBranch...");
             initialized = true;
-            LOG_DEBUG("Initialized ListOBranch!\n");
+            LOG_DEBUG("Initialized ListOBranch!");
             return true;
         }
-        LOG_DEBUG("Already initialized ListOBranch!\n");
+        LOG_DEBUG("Already initialized ListOBranch!");
         return false;
     }
 
     bool safeExit(std::string* saveDataFile) {
         if (saveDataFile == nullptr || saveDataFile->empty()) {
-            LOG_DEBUG("Invalid save data file provided for safe exit.\n");
+            LOG_DEBUG("Invalid save data file provided for safe exit.");
             return false;
         }
         if (initialized) {
-            LOG_DEBUG("Exiting ListOBranch safely...\n");
-            // cleanup here
+            LOG_DEBUG("Exiting ListOBranch safely...");
             saveData(saveDataFile);
             initialized = false;
-            LOG_DEBUG("ListOBranch exited safely.\n");
+            LOG_DEBUG("ListOBranch exited safely.");
         } else {
-            LOG_DEBUG("ListOBranch was not initialized. No need to exit safely.\n");
+            LOG_DEBUG("ListOBranch was not initialized. No need to exit safely.");
             return false;
         }
         return true;
@@ -57,12 +54,11 @@ namespace ListOBranch {
 
     bool safeExit() {
         if (initialized) {
-            LOG_DEBUG("Exiting ListOBranch safely...\n");
-            // cleanup here
+            LOG_DEBUG("Exiting ListOBranch safely...");
             initialized = false;
-            LOG_DEBUG("ListOBranch exited safely.\n");
+            LOG_DEBUG("ListOBranch exited safely.");
         } else {
-            LOG_DEBUG("ListOBranch was not initialized. No need to exit safely.\n");
+            LOG_DEBUG("ListOBranch was not initialized. No need to exit safely.");
             return false;
         }
         return true;
@@ -70,19 +66,17 @@ namespace ListOBranch {
 
     bool saveData(const std::string* filename) {
         if (filename == nullptr || filename->empty()) {
-            LOG_DEBUG("Invalid filename provided for saving data.\n");
+            LOG_DEBUG("Invalid filename provided for saving data.");
             return false;
         }
-        LOG_DEBUG("Saving data to " + *filename + "...\n");
-        // Dummy implementation
-        LOG_DEBUG("Data saved to " + *filename + "\n");
+        LOG_DEBUG("Saving data to " << *filename << "...");
+        LOG_DEBUG("Data saved to " << *filename);
         return true;
     }
 
     bool loadData(const std::string* filename) {
-        LOG_DEBUG("Loading data from " + *filename + "...\n");
-        // Dummy implementation
-        LOG_DEBUG("Data loaded from " + *filename + "\n");
+        LOG_DEBUG("Loading data from " << *filename << "...");
+        LOG_DEBUG("Data loaded from " << *filename);
         return true;
     }
 
@@ -103,165 +97,165 @@ namespace ListOBranch {
     }
 
     bool removeRepository(const Repo::RepoData* repo) {
-        LOG_DEBUG("Finding repository: " + repo->name + "\n");
+        LOG_DEBUG("Finding repository: " << repo->name);
         auto it = std::remove_if(repositories.begin(), repositories.end(),
                                  [repo](Repo::RepoData* r) { return r->name == repo->name; });
         if (it != repositories.end()) {
             repositories.erase(it, repositories.end());
-            LOG_DEBUG("Repository removed: " + repo->name + "\n");
+            LOG_DEBUG("Repository removed: " << repo->name);
             return true;
         }
-        LOG_DEBUG("Repository not found: " + repo->name + "\n");
+        LOG_DEBUG("Repository not found: " << repo->name);
         return false;
     }
 
     bool removeRepository(std::string* name) {
-        LOG_DEBUG("Finding repository: " + *name + "\n");
+        LOG_DEBUG("Finding repository: " << *name);
         auto it = std::remove_if(repositories.begin(), repositories.end(),
                                  [*name](Repo::RepoData* r) { return r->name == *name; });
         if (it != repositories.end()) {
             repositories.erase(it, repositories.end());
-            LOG_DEBUG("Repository removed: " + *name + "\n");
+            LOG_DEBUG("Repository removed: " << *name);
             return true;
         }
-        LOG_DEBUG("Repository not found: " + *name + "\n");
+        LOG_DEBUG("Repository not found: " << *name);
         return false;
     }
-    
+
     bool addBranchToRepository(Repo::RepoData* repo, Branch::BranchData* branch) {
-        LOG_DEBUG("Adding branch " + branch->name + " to repository " + repo->name + "\n");
+        LOG_DEBUG("Adding branch " << branch->name << " to repository " << repo->name);
         for (Repo::RepoData* r : repositories) {
             if (r->name == repo->name) {
                 if (Repo::addBranchToRepository(r, branch)){
-                    LOG_DEBUG("Added branch " + branch->name + " to repository " + repo->name + "\n");
+                    LOG_DEBUG("Added branch " << branch->name << " to repository " << repo->name);
                     return true;
                 } else {
-                    LOG_DEBUG("Failed to add branch " + branch->name + " to repository " + repo->name + "\n");
+                    LOG_DEBUG("Failed to add branch " << branch->name << " to repository " << repo->name);
                     return false;
                 }
             }
         }
-        LOG_DEBUG("Repository not found: " + repo->name + "\n");
+        LOG_DEBUG("Repository not found: " << repo->name);
         return false;
     }
 
     bool addBranchToRepository(Repo::RepoData* repo, const std::string* branchName) {
-        LOG_DEBUG("Adding branch " + *branchName + " to repository " + repo->name + "\n");
+        LOG_DEBUG("Adding branch " << *branchName << " to repository " << repo->name);
         for (Repo::RepoData* r : repositories) {
             if (r->name == repo->name) {
                 if (Repo::addBranchToRepository(r, branchName)) {
-                    LOG_DEBUG("Added branch " + *branchName + " to repository " + repo->name + "\n");
+                    LOG_DEBUG("Added branch " << *branchName << " to repository " << repo->name);
                     return true;
                 } else {
-                    LOG_DEBUG("Failed to add branch " + *branchName + " to repository " + repo->name + "\n");
+                    LOG_DEBUG("Failed to add branch " << *branchName << " to repository " << repo->name);
                     return false;
                 }
             }
         }
-        LOG_DEBUG("Repository not found: " + repo->name + "\n");
+        LOG_DEBUG("Repository not found: " << repo->name);
         return false;
     }
 
     bool addBranchToRepository(std::string* repoName, Branch::BranchData* branch) {
-        LOG_DEBUG("Adding branch " + branch->name + " to repository " + *repoName + "\n");
+        LOG_DEBUG("Adding branch " << branch->name << " to repository " << *repoName);
         for (Repo::RepoData* r : repositories) {
             if (r->name == *repoName) {
                 if (Repo::addBranchToRepository(r, branch)) {
-                    LOG_DEBUG("Added branch " + branch->name + " to repository " + *repoName + "\n");
+                    LOG_DEBUG("Added branch " << branch->name << " to repository " << *repoName);
                     return true;
                 } else {
-                    LOG_DEBUG("Failed to add branch " + branch->name + " to repository " + *repoName + "\n");
+                    LOG_DEBUG("Failed to add branch " << branch->name << " to repository " << *repoName);
                     return false;
                 }
             }
         }
-        LOG_DEBUG("Repository not found: " + *repoName + "\n");
+        LOG_DEBUG("Repository not found: " << *repoName);
         return false;
     }
 
     bool addBranchToRepository(const std::string* repoName, const std::string* branchName) {
-        LOG_DEBUG("Adding branch " + *branchName + " to repository " + *repoName + "\n");
+        LOG_DEBUG("Adding branch " << *branchName << " to repository " << *repoName);
         for (Repo::RepoData* r : repositories) {
             if (r->name == *repoName) {
                 if (Repo::addBranchToRepository(r, branchName)) {
-                    LOG_DEBUG("Added branch " + *branchName + " to repository " + *repoName + "\n");
+                    LOG_DEBUG("Added branch " << *branchName << " to repository " << *repoName);
                     return true;
                 } else {
-                    LOG_DEBUG("Failed to add branch " + *branchName + " to repository " + *repoName + "\n");
+                    LOG_DEBUG("Failed to add branch " << *branchName << " to repository " << *repoName);
                     return false;
                 }
             }
         }
-        LOG_DEBUG("Repository not found: " + *repoName + "\n");
+        LOG_DEBUG("Repository not found: " << *repoName);
         return false;
     }
 
-    /*
-    bool removeBranchFromRepository(Repo::RepoData* repo, const Branch::BranchData* branch) {
-        LOG_DEBUG("Removing branch " + branch->name + " from repository " + repo->name + "\n");
-        for (const Repo::RepoData* r : repositories) {
-            if (r->name == repo->name) {
-                if (Repo::deleteBranchFromRepository(r, branch)) {
-                    LOG_DEBUG("Removed branch " + branch->name + " from repository " + repo->name + "\n");
-                    return true;
-                } else {
-                    LOG_DEBUG("Failed to remove branch " + branch->name + " from repository " + repo->name + "\n");
-                    return false;
-                }
-            }
-        }
-        LOG_DEBUG("Repository not found: " + repo->name + "\n");
-        return false;
-    }
-
-    bool removeBranchFromRepository(Repo::RepoData* repo, const std::string* branchName) {
-        LOG_DEBUG("Removing branch " + *branchName + " from repository " + repo->name + "\n");
-        for (const Repo::RepoData* r : repositories) {
-            if (r->name == repo->name) {
-                if (Repo::deleteBranchFromRepository(r, branchName)) {
-                    LOG_DEBUG("Removed branch " + *branchName + " from repository " + repo->name + "\n");
-                    return true;
-                } else {
-                    LOG_DEBUG("Failed to remove branch " + *branchName + " from repository " + repo->name + "\n");
-                    return false;
-                }
-            }
-        }
-        LOG_DEBUG("Repository not found: " + repo->name + "\n");
-        return false;
-    }
-
-    bool removeBranchFromRepository(const std::string* repoName, const Branch::BranchData* branch) {
-        LOG_DEBUG("Removing branch " + branch->name + " from repository " + *repoName + "\n");
-        for (const Repo::RepoData* r : repositories) {
-            if (r->name == *repoName) {
-                if (Repo::deleteBranchFromRepository(r, branch)) {
-                    LOG_DEBUG("Removed branch " + branch->name + " from repository " + *repoName + "\n");
-                    return true;
-                } else {
-                    LOG_DEBUG("Failed to remove branch " + branch->name + " from repository " + *repoName + "\n");
-                    return false;
-                }
-            }
-        }
-        LOG_DEBUG("Repository not found: " + *repoName + "\n");
-        return false;
-    }
-
-    bool removeBranchFromRepository(const std::string* repoName, const std::string* branchName) {
-        LOG_DEBUG("Removing branch " + *branchName + " from repository " + *repoName + "\n");
-        for (const Repo::RepoData* r : repositories) {
-            if (r->name == *repoName) {
-                if (Repo::deleteBranchFromRepository(r, branchName)) {
-                    LOG_DEBUG("Removed branch " + *branchName + " from repository " + *repoName + "\n");
-                    return true;
-                } else {
-                    LOG_DEBUG("Failed to remove branch " + *branchName + " from repository " + *repoName + "\n");
-                    return false;
-                }
-            }
-        }
-        LOG_DEBUG("Repository not found: " + *repoName + "\n");
-        return false;
-    }*/
+     /*
+-    bool removeBranchFromRepository(Repo::RepoData* repo, const Branch::BranchData* branch) {
+-        LOG_DEBUG("Removing branch " + branch->name + " from repository " + repo->name + "\n");
+-        for (const Repo::RepoData* r : repositories) {
+-            if (r->name == repo->name) {
+-                if (Repo::deleteBranchFromRepository(r, branch)) {
+-                    LOG_DEBUG("Removed branch " + branch->name + " from repository " + repo->name + "\n");
+-                    return true;
+-                } else {
+-                    LOG_DEBUG("Failed to remove branch " + branch->name + " from repository " + repo->name + "\n");
+-                    return false;
+-                }
+-            }
+-        }
+-        LOG_DEBUG("Repository not found: " + repo->name + "\n");
+-        return false;
+-    }
+-
+-    bool removeBranchFromRepository(Repo::RepoData* repo, const std::string* branchName) {
+-        LOG_DEBUG("Removing branch " + *branchName + " from repository " + repo->name + "\n");
+-        for (const Repo::RepoData* r : repositories) {
+-            if (r->name == repo->name) {
+-                if (Repo::deleteBranchFromRepository(r, branchName)) {
+-                    LOG_DEBUG("Removed branch " + *branchName + " from repository " + repo->name + "\n");
+-                    return true;
+-                } else {
+-                    LOG_DEBUG("Failed to remove branch " + *branchName + " from repository " + repo->name + "\n");
+-                    return false;
+-                }
+-            }
+-        }
+-        LOG_DEBUG("Repository not found: " + repo->name + "\n");
+-        return false;
+-    }
+-
+-    bool removeBranchFromRepository(const std::string* repoName, const Branch::BranchData* branch) {
+-        LOG_DEBUG("Removing branch " + branch->name + " from repository " + *repoName + "\n");
+-        for (const Repo::RepoData* r : repositories) {
+-            if (r->name == *repoName) {
+-                if (Repo::deleteBranchFromRepository(r, branch)) {
+-                    LOG_DEBUG("Removed branch " + branch->name + " from repository " + *repoName + "\n");
+-                    return true;
+-                } else {
+-                    LOG_DEBUG("Failed to remove branch " + branch->name + " from repository " + *repoName + "\n");
+-                    return false;
+-                }
+-            }
+-        }
+-        LOG_DEBUG("Repository not found: " + *repoName + "\n");
+-        return false;
+-    }
+-
+-    bool removeBranchFromRepository(const std::string* repoName, const std::string* branchName) {
+-        LOG_DEBUG("Removing branch " + *branchName + " from repository " + *repoName + "\n");
+-        for (const Repo::RepoData* r : repositories) {
+-            if (r->name == *repoName) {
+-                if (Repo::deleteBranchFromRepository(r, branchName)) {
+-                    LOG_DEBUG("Removed branch " + *branchName + " from repository " + *repoName + "\n");
+-                    return true;
+-                } else {
+-                    LOG_DEBUG("Failed to remove branch " + *branchName + " from repository " + *repoName + "\n");
+-                    return false;
+-                }
+-            }
+-        }
+-        LOG_DEBUG("Repository not found: " + *repoName + "\n");
+-        return false;
+-    }*/
 }
