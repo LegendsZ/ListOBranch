@@ -89,9 +89,11 @@ namespace ListOBranch {
         return true;
     }
 
-    bool addRepository(const std::string* name) {
+    bool addRepository(const std::string* name, const std::string* remoteUrl, const std::string* localPath) {
         Repo::RepoData* repo = new Repo::RepoData();
         repo->name = *name;
+        repo->remoteUrl = *remoteUrl;
+        repo->localPath = *localPath;
         repositories.push_back(repo);
         return true;
     }
@@ -121,6 +123,8 @@ namespace ListOBranch {
         LOG_DEBUG("Repository not found: " << *name);
         return false;
     }
+
+    //TODO: add removeRepository by remote url and/or local path.
 
     bool addBranchToRepository(Repo::RepoData* repo, Branch::BranchData* branch) {
         LOG_DEBUG("Adding branch " << branch->name << " to repository " << repo->name);

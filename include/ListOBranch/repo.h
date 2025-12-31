@@ -9,6 +9,8 @@ namespace ListOBranch {
   namespace Repo {
     struct RepoData{
       std::string name;
+      std::string remoteUrl;
+      std::string localPath;
       std::vector<Branch::BranchData*> branches;
     };
 
