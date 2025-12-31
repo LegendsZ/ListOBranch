@@ -10,10 +10,11 @@ namespace ListOBranch{
       return false;
     }
 
-    bool addBranchToRepository(Repo::RepoData* repo, const std::string* branchName) {
+    bool addBranchToRepository(Repo::RepoData* repo, const std::string* branchName, const std::string* prLink) {
       if (repo && branchName && !branchName->empty()) {
         Branch::BranchData* branch = new Branch::BranchData();
         branch->name = *branchName;
+        branch->prLink = *prLink;
         return addBranchToRepository(repo, branch);
       }
       return false;
@@ -31,6 +32,7 @@ namespace ListOBranch{
       return false;
     }
 
+    //TODO: add removeBranchFromRepository by prLink.
     bool removeBranchFromRepository(Repo::RepoData* repo, const std::string* branchName) {
       if (repo && branchName && !branchName->empty()) {
         Branch::BranchData branch;

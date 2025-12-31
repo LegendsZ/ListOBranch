@@ -143,11 +143,11 @@ namespace ListOBranch {
         return false;
     }
 
-    bool addBranchToRepository(Repo::RepoData* repo, const std::string* branchName) {
+    bool addBranchToRepository(Repo::RepoData* repo, const std::string* branchName, const std::string* prLink) {
         LOG_DEBUG("Adding branch " << *branchName << " to repository " << repo->name);
         for (Repo::RepoData* r : repositories) {
             if (r->name == repo->name) {
-                if (Repo::addBranchToRepository(r, branchName)) {
+                if (Repo::addBranchToRepository(r, branchName, prLink)) {
                     LOG_DEBUG("Added branch " << *branchName << " to repository " << repo->name);
                     return true;
                 } else {
@@ -177,11 +177,11 @@ namespace ListOBranch {
         return false;
     }
 
-    bool addBranchToRepository(const std::string* repoName, const std::string* branchName) {
+    bool addBranchToRepository(const std::string* repoName, const std::string* branchName, const std::string* prLink) {
         LOG_DEBUG("Adding branch " << *branchName << " to repository " << *repoName);
         for (Repo::RepoData* r : repositories) {
             if (r->name == *repoName) {
-                if (Repo::addBranchToRepository(r, branchName)) {
+                if (Repo::addBranchToRepository(r, branchName, prLink)) {
                     LOG_DEBUG("Added branch " << *branchName << " to repository " << *repoName);
                     return true;
                 } else {
