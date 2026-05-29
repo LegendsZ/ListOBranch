@@ -1,4 +1,4 @@
-#include "listobranch/repo.h"
+#include "ListOBranch/repo.h"
 
 namespace ListOBranch{
   namespace Repo{
@@ -15,6 +15,16 @@ namespace ListOBranch{
         Branch::BranchData* branch = new Branch::BranchData();
         branch->name = *branchName;
         branch->prLink = *prLink;
+        return addBranchToRepository(repo, branch);
+      }
+      return false;
+    }
+
+    bool addBranchToRepository(Repo::RepoData* repo, Branch::BranchData* branch, const std::string* prLink){
+      if (repo && branch) {
+        if (prLink) {
+          branch->prLink = *prLink;
+        }
         return addBranchToRepository(repo, branch);
       }
       return false;

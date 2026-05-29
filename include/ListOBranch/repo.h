@@ -16,6 +16,8 @@ namespace ListOBranch {
 
     bool addBranchToRepository(Repo::RepoData* repo, Branch::BranchData* branch);
     bool addBranchToRepository(Repo::RepoData* repo, const std::string* branchName);
+    bool addBranchToRepository(Repo::RepoData* repo, Branch::BranchData* branch, const std::string* prLink);
+    bool addBranchToRepository(Repo::RepoData* repo, const std::string* branchName, const std::string* prLink);
 
     bool removeBranchFromRepository(Repo::RepoData* repo, const Branch::BranchData* branch);
     bool removeBranchFromRepository(Repo::RepoData* repo, const std::string* branchName);
