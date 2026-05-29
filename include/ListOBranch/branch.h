@@ -9,7 +9,7 @@ namespace ListOBranch {
   namespace Branch {
     struct BranchData{
       std::string name;
-      std::string prLink
+      std::string prLink;
     };
   }
 }
